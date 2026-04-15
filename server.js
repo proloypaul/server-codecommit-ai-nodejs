@@ -40,6 +40,30 @@ app.post("/generate-commit", async (req, res) => {
   }
 });
 
+// improve code api
+app.post("/improve-code", async (req, res) => {
+  const { code } = req.body;
+
+  const completion = await openai.chat.completions.create({
+    model: "gpt-4o-mini",
+    messages: [
+      {
+        role: "system",
+        content:
+          "Improve this code. Return only updated code without explanation.",
+      },
+      {
+        role: "user",
+        content: code,
+      },
+    ],
+  });
+
+  res.json({
+    code: completion.choices[0].message.content,
+  });
+});
+
 app.listen(3000, () => {
   console.log("AI server running on http://localhost:3000");
 });
