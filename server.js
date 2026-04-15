@@ -33,6 +33,7 @@ app.post("/generate-commit", async (req, res) => {
 
     const message = completion.choices[0].message.content.trim();
 
+    console.log("model response message", message);
     res.json({ message });
   } catch (err) {
     res.status(500).json({ message: "Error generating commit message" });
