@@ -5,4 +5,5 @@ module.exports = {
     apiUrl: process.env.OPEN_ROUTE_URL,
     apiKey: process.env.OPEN_ROUTE_API_KEY,
   },
+  port: process.env.PORT,
 };

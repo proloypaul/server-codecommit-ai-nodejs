@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const { OpenAI } = require("openai");
-const { openApiKey } = require("./config");
+const { openApiKey, port } = require("./config");
 
 const app = express();
 app.use(cors());
@@ -59,11 +59,15 @@ app.post("/improve-code", async (req, res) => {
     ],
   });
 
+  console.log(
+    "suggestion code response",
+    completion.choices[0].message.content,
+  );
   res.json({
     code: completion.choices[0].message.content,
   });
 });
 
-app.listen(3000, () => {
-  console.log("AI server running on http://localhost:3000");
+app.listen(port, () => {
+  console.log(`AI server running on http://localhost:${port}`);
 });
